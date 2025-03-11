@@ -34,17 +34,3 @@ async function initializeApp() {
 }
 
 initializeApp();
-
-pool.connect()
-    .then(() => console.log(`Connected to the database successfully "${process.env.DB_NAME}"`))
-    .catch(err => console.error("Error connecting to the database", err));
-
-app.get('/api/posts', async(req, res) => {
-    try {
-        const result = await pool.query('SELECT * FROM posts');
-        res.json(result.rows);
-    } catch(error) {
-        console.error("Error fetching posts", error);
-        res.status(500).json({error: "Error fetching posts"});
-    }
-});
